@@ -90,9 +90,9 @@
 
         <div class="audio-container">
         <div class="audio-label">now playing: moon - prettifun</div>
-        <audio controls src="SpotiDownloader.com - Moon - prettifun.mp3"></audio> 
+        <!-- Added autoplay and loop so it loops seamlessly -->
+        <audio id="bg-audio" controls autoplay loop src="SpotiDownloader.com - Moon - prettifun.mp3"></audio> 
     </div>
-
 
     <script>
         function updateClock() {
@@ -108,6 +108,17 @@
         }
         updateClock();
         setInterval(updateClock, 1000);
+
+        // Autoplay bypass trick: forces audio to play on the very first touch/click anywhere on screen
+        const audio = document.getElementById('bg-audio');
+        function forcePlay() {
+            audio.play().catch(error => console.log("Autoplay blocked by browser policy; waiting for click."));
+            // Remove listeners immediately once it starts playing successfully
+            document.removeEventListener('click', forcePlay);
+            document.removeEventListener('touchstart', forcePlay);
+        }
+        document.addEventListener('click', forcePlay);
+        document.addEventListener('touchstart', forcePlay);
     </script>
 
 </body>

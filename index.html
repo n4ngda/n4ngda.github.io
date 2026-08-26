@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,44 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>n4ngda</title>
     <style>
-      <body>
-    <h1 style="display: flex; align-items: center; gap: 12px; margin-bottom: 5px;">
-        n4ngda 
-        <img src="n4ngda.jpg" alt="" style="width: 20px; height: 20px; object-fit: cover; border-radius: 0px; border: 1px solid #333333;">
-    </h1>
-
-   
-    <div class="clock" id="imphal-clock">loading time...</div>
-
-    <ul>
-        <li>-> <a href="https://instagram.com" target="_blank">instagram</a></li>
-        <li>-> <a href="https://spotify.com" target="_blank">spotify</a></li>
-        <li>-> <a href="https://strava.com" target="_blank">strava</a></li>
-    </ul>
-
-    <div class="audio-container">
-        <div class="audio-label">now playing: misery - matt proxy</div>
-        <audio controls src="MISERY - matt proxy.mp3"></audio> 
-    </div>
-
-    <script>
-        function updateClock() {
-            const options = {
-                timeZone: 'Asia/Kolkata',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            };
-            const formatter = new Intl.DateTimeFormat('en-US', options);
-            document.getElementById('imphal-clock').textContent = `imphal // ${formatter.format(new Date()).toLowerCase()}`;
+        body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: monospace;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 0 20px;
         }
-        updateClock();
-        setInterval(updateClock, 1000);
-    </script>
 
-</body>
- 
+        h1 {
+            font-size: 1.1rem;
+            font-weight: normal;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .clock {
+            font-size: 0.9rem;
+            color: #888888;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        li {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .audio-container {
+            margin-top: 30px;
+        }
+
+        .audio-label {
+            font-size: 0.85rem;
+            color: #888888;
+            margin-bottom: 8px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 300px;
+            filter: invert(1) hue-rotate(180deg);
+        }
+    </style>
+</head>
+<body>
 
     <h1>n4ngda</h1>
     <div class="clock" id="imphal-clock">loading time...</div>

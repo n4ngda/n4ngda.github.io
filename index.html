@@ -37,6 +37,12 @@
             z-index: 9999;
         }
 
+        #enter-instruction {
+            color: #888888;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
         #enter-btn {
             color: #ffffff;
             background: none;
@@ -45,7 +51,7 @@
             font-size: 0.95rem;
             text-decoration: underline;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 5px;
             padding: 5px 10px;
         }
 
@@ -121,6 +127,7 @@
     <!-- Entry Gate Screen -->
     <div id="gate">
         <h1>n4ngda</h1>
+        <div id="enter-instruction">press any key or</div>
         <button id="enter-btn">[enter]</button>
     </div>
 
@@ -156,17 +163,27 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Click interaction logic to drop gate layer and activate loop audio stream
-        document.getElementById('enter-btn').addEventListener('click', function() {
+        // Core unlock action function
+        function unlockSite() {
             document.getElementById('gate').style.display = 'none';
             document.getElementById('main-content').style.display = 'flex';
             
             const audio = document.getElementById('bg-audio');
             audio.play().catch(err => console.log("Audio play blocked:", err));
-        });
+
+            // Clean up event listeners so they don't fire again
+            document.removeEventListener('keydown', unlockSite);
+        }
+
+        // Trigger unlock via manual button click (for mobile/touch screens)
+        document.getElementById('enter-btn').addEventListener('click', unlockSite);
+
+        // Trigger unlock when any keyboard key is pressed (for desktop browsers)
+        document.addEventListener('keydown', unlockSite);
     </script>
 
 </body>
 </html>
+
 
 

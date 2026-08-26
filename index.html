@@ -11,8 +11,16 @@
             font-family: monospace;
             line-height: 1.6;
             max-width: 600px;
-            margin: 50px auto;
+            margin: 0 auto;
             padding: 0 20px;
+            
+            /* Dead-center aligning framework styles */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
         }
 
         h1 {
@@ -50,7 +58,10 @@
         }
 
         .audio-container {
-            margin-top: 30px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .audio-label {
@@ -100,3 +111,4 @@
 
 </body>
 </html>
+

@@ -5,84 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>n4ngda</title>
     <style>
-        /* Brutalist Minimalist Styling */
         body {
-            background-color: #ffffff; /* White background */
-            color: #111111;            /* Near black text */
-            font-family: monospace;    /* Raw terminal/code font */
-            line-height: 1.5;
-            max-width: 650px;          /* Clean, narrow column reading width */
-            margin: 40px auto;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: monospace;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 50px auto;
             padding: 0 20px;
         }
 
         h1 {
-            font-size: 1.5rem;
-            font-weight: normal;
-            margin-bottom: 20px;
-        }
-
-        h2 {
             font-size: 1.1rem;
             font-weight: normal;
-            margin-top: 40px;
-            margin-bottom: 10px;
-            text-decoration: underline;
+            margin-bottom: 5px;
         }
 
-        p {
+        .clock {
+            font-size: 0.9rem;
+            color: #888888;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        li {
             font-size: 0.95rem;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        /* Simple text links */
         a {
-            color: #111111;
-            text-decoration: underline;
+            color: #ffffff;
+            text-decoration: none;
         }
 
         a:hover {
-            background-color: #111111;
-            color: #ffffff;
-        }
-
-        /* Divider lines */
-        hr {
-            border: 0;
-            border-top: 1px dashed #ccc;
-            margin: 30px 0;
+            background-color: #ffffff;
+            color: #000000;
         }
 
         .spotify-wrapper {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .footer {
-            margin-top: 60px;
-            font-size: 0.8rem;
-            color: #666;
+            margin-top: 30px;
+            border: 1px dashed #333333;
+            padding: 4px;
         }
     </style>
 </head>
 <body>
 
     <h1>n4ngda</h1>
-    
-    <p>Welcome. This is my corner of the web.</p>
-    <p>Building things, curating soundscapes, keeping it quiet.</p>
+    <!-- Live terminal style clock -->
+    <div class="clock" id="imphal-clock">loading time...</div>
 
-    <hr>
+    <ul>
+        <li>-> <a href="https://instagram.com" target="_blank">instagram</a></li>
+        <li>-> <a href="https://spotify.com" target="_blank">spotify</a></li>
+        <li>-> <a href="https://strava.com" target="_blank">strava</a></li>
+    </ul>
 
-    <h2>music</h2>
-    <p>Current audio rotation from my Spotify profile:</p>
-    
     <div class="spotify-wrapper">
-        <!-- Compact minimalist frame for your Spotify profile -->
         <iframe style="border-radius:0px" 
             src="https://spotify.com" 
             width="100%" 
-            height="352" 
+            height="152" 
             frameBorder="0" 
             allowfullscreen="" 
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
@@ -90,19 +79,28 @@
         </iframe>
     </div>
 
-    <hr>
+    <script>
+        function updateClock() {
+            const options = {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            const timeString = formatter.format(new Date());
+            
+            document.getElementById('imphal-clock').textContent = `imphal // ${timeString.toLowerCase()}`;
+        }
 
-    <h2>contact</h2>
-    <p>Find me or reach out here:</p>
-    <p>
-        — <a href="mailto:your.email@example.com">email</a><br>
-        — <a href="https://spotify.com" target="_blank">spotify</a>
-    </p>
-
-    <div class="footer">
-        <p>n4ngda — 2026</p>
-    </div>
+        // Run clock immediately and update every second
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 
 </body>
 </html>
+
 

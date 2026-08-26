@@ -13,14 +13,53 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 0 20px;
-            
-            /* Dead-center aligning framework styles */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Minimalist Entry Gate Overlay */
+        #gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #enter-btn {
+            color: #ffffff;
+            background: none;
+            border: none;
+            font-family: monospace;
+            font-size: 0.95rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 15px;
+            padding: 5px 10px;
+        }
+
+        #enter-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+        }
+
+        /* Main website components hidden at load */
+        #main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -79,19 +118,27 @@
 </head>
 <body>
 
-    <h1>n4ngda</h1>
-    <div class="clock" id="imphal-clock">loading time...</div>
+    <!-- Entry Gate Screen -->
+    <div id="gate">
+        <h1>n4ngda</h1>
+        <button id="enter-btn">[enter]</button>
+    </div>
 
-    <ul>
-        <li>-> <a href="https://instagram.com/n4ngda" target="_blank">instagram</a></li>
-        <li>-> <a href="https://open.spotify.com/user/31mukm76ymettqxaris6z2jgosbu" target="_blank">spotify</a></li>
-        <li>-> <a href="https://www.strava.com/athletes/179097665" target="_blank">strava</a></li>
-    </ul>
+    <!-- Centered Profile Layout Content -->
+    <div id="main-content">
+        <h1>n4ngda</h1>
+        <div class="clock" id="imphal-clock">loading time...</div>
+
+        <ul>
+            <li>-> <a href="https://instagram.com/n4ngda" target="_blank">instagram</a></li>
+            <li>-> <a href="https://open.spotify.com/user/31mukm76ymettqxaris6z2jgosbu" target="_blank">spotify</a></li>
+            <li>-> <a href="https://www.strava.com/athletes/179097665" target="_blank">strava</a></li>
+        </ul>
 
         <div class="audio-container">
-        <div class="audio-label">now playing: moon - prettifun</div>
-        <!-- Added autoplay and loop so it loops seamlessly -->
-        <audio id="bg-audio" controls autoplay loop src="SpotiDownloader.com - Moon - prettifun.mp3"></audio> 
+            <div class="audio-label">now playing: moon - prettifun</div>
+            <audio id="bg-audio" controls loop src="SpotiDownloader.com - Moon - prettifun.mp3"></audio> 
+        </div>
     </div>
 
     <script>
@@ -109,18 +156,17 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Autoplay bypass trick: forces audio to play on the very first touch/click anywhere on screen
-        const audio = document.getElementById('bg-audio');
-        function forcePlay() {
-            audio.play().catch(error => console.log("Autoplay blocked by browser policy; waiting for click."));
-            // Remove listeners immediately once it starts playing successfully
-            document.removeEventListener('click', forcePlay);
-            document.removeEventListener('touchstart', forcePlay);
-        }
-        document.addEventListener('click', forcePlay);
-        document.addEventListener('touchstart', forcePlay);
+        // Click interaction logic to drop gate layer and activate loop audio stream
+        document.getElementById('enter-btn').addEventListener('click', function() {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            
+            const audio = document.getElementById('bg-audio');
+            audio.play().catch(err => console.log("Audio play blocked:", err));
+        });
     </script>
 
 </body>
 </html>
+
 

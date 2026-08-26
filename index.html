@@ -3,88 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>n4ngda</title>
+    <title>nongda's Space</title>
     <style>
+        /* Modern, clean styling resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #121212;
-            color: #e0e0e0;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 0 20px;
+            background-color: #121212; /* Dark elegant background */
+            color: #e5e5e5;
             line-height: 1.6;
         }
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            letter-spacing: -1px;
+
+        /* Navigation Bar */
+        nav {
+            background-color: #000000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        a {
-            color: #888;
-            text-decoration: none;
-            border-bottom: 1px dotted #555;
-        }
-        a:hover {
-            color: #fff;
-            border-bottom: 1px solid #fff;
-        }
-        .meta-info {
-            font-size: 0.9rem;
-            color: #777;
-            margin-bottom: 30px;
-        }
-        .nav-links {
-            margin: 20px 0;
-            padding: 0;
+
+        nav ul {
+            display: flex;
+            justify-content: center;
             list-style: none;
         }
-        .nav-links li {
-            margin-bottom: 8px;
+
+        nav ul li {
+            margin: 0 1.5rem;
         }
-        .music-container {
-            margin-top: 40px;
-            border-top: 1px dashed #333;
-            padding-top: 20px;
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #1DB954; /* Spotify Green */
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero / About Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: #181818;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #b3b3b3;
+        }
+
+        /* Sections Styling */
+        section {
+            padding: 3rem 0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #1DB954; /* Spotify Green Accent */
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        /* Spotify Section Box */
+        .spotify-container {
+            background: #181818;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        /* Simple Contact Form */
+        form {
+            background: #181818;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #333;
+            background-color: #282828;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: 1px solid #1DB954;
+        }
+
+        button {
+            background-color: #1DB954; /* Spotify Green */
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px; /* Rounded pill style like Spotify */
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            background-color: #1ed760;
+            transform: scale(1.04);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #000000;
+            color: #b3b3b3;
+            margin-top: 4rem;
         }
     </style>
 </head>
 <body>
 
-    <h1>n4ngda</h1>
-    <div class="meta-info">
-        <span id="live-clock">Imphal: Loading...</span>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#music">My Spotify</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about" class="hero">
+            <h1>nongda</h1>
+            <p>Welcome to my custom space.</p>
+            <p style="margin-top: 1rem; font-size: 1rem; color: #b3b3b3;">You can edit this file anytime to customize your bio, showcase your interests, or drop custom links.</p>
+        </section>
+
+        <!-- Spotify Music Section -->
+        <section id="music">
+            <h2>My Spotify Profile</h2>
+            <div class="spotify-container">
+                <!-- Profile embed linked to user id 31mukm76ymettqxaris6z2jgosbu -->
+                <iframe style="border-radius:12px" 
+                    src="https://spotify.com" 
+                    width="100%" 
+                    height="352" 
+                    frameBorder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <form action="https://formspree.io" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
     </div>
 
-    <ul class="nav-links">
-        <li>→ <a href="https://instagram.com" target="_blank">instagram</a></li>
-        <li>→ <a href="https://www.strava.com/athletes/179097665" target="_blank">strava</a></li>
-        <li>→ <a href="https://github.com" target="_blank">github</a></li>
-    </ul>
-
-    <div class="music-container">
-        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">// currently listening to:</p>
-        <!-- Your custom 16th August playlist embed -->
-        <iframe style="border-radius:12px" src="https://spotify.com" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-
-    <script>
-        function updateClock() {
-            const options = {
-                timeZone: 'Asia/Kolkata',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            };
-            
-            const formatter = new Intl.DateTimeFormat('en-US', options);
-            document.getElementById('live-clock').textContent = `Imphal: ${formatter.format(new Date())}`;
-        }
-
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 nongda. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
+
 

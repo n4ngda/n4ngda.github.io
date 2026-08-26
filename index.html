@@ -3,226 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nongda's Space</title>
+    <title>n4ngda</title>
     <style>
-        /* Modern, clean styling resets */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        /* Brutalist Minimalist Styling */
         body {
-            background-color: #121212; /* Dark elegant background */
-            color: #e5e5e5;
-            line-height: 1.6;
+            background-color: #ffffff; /* White background */
+            color: #111111;            /* Near black text */
+            font-family: monospace;    /* Raw terminal/code font */
+            line-height: 1.5;
+            max-width: 650px;          /* Clean, narrow column reading width */
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        /* Navigation Bar */
-        nav {
-            background-color: #000000;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        h1 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
         }
 
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
+        h2 {
+            font-size: 1.1rem;
+            font-weight: normal;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            text-decoration: underline;
         }
 
-        nav ul li {
-            margin: 0 1.5rem;
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
 
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
+        /* Simple text links */
+        a {
+            color: #111111;
+            text-decoration: underline;
         }
 
-        nav ul li a:hover {
-            color: #1DB954; /* Spotify Green */
+        a:hover {
+            background-color: #111111;
+            color: #ffffff;
         }
 
-        /* Main Container */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
+        /* Divider lines */
+        hr {
+            border: 0;
+            border-top: 1px dashed #ccc;
+            margin: 30px 0;
         }
 
-        /* Hero / About Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: #181818;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            margin-bottom: 2rem;
+        .spotify-wrapper {
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #b3b3b3;
-        }
-
-        /* Sections Styling */
-        section {
-            padding: 3rem 0;
-        }
-
-        section h2 {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid #1DB954; /* Spotify Green Accent */
-            display: inline-block;
-            padding-bottom: 0.3rem;
-        }
-
-        /* Spotify Section Box */
-        .spotify-container {
-            background: #181818;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        /* Simple Contact Form */
-        form {
-            background: #181818;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #333;
-            background-color: #282828;
-            color: #fff;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: 1px solid #1DB954;
-        }
-
-        button {
-            background-color: #1DB954; /* Spotify Green */
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px; /* Rounded pill style like Spotify */
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        button:hover {
-            background-color: #1ed760;
-            transform: scale(1.04);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: #000000;
-            color: #b3b3b3;
-            margin-top: 4rem;
+        .footer {
+            margin-top: 60px;
+            font-size: 0.8rem;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#music">My Spotify</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <h1>n4ngda</h1>
+    
+    <p>Welcome. This is my corner of the web.</p>
+    <p>Building things, curating soundscapes, keeping it quiet.</p>
 
-    <div class="container">
-        <!-- About Section -->
-        <section id="about" class="hero">
-            <h1>nongda</h1>
-            <p>Welcome to my custom space.</p>
-            <p style="margin-top: 1rem; font-size: 1rem; color: #b3b3b3;">You can edit this file anytime to customize your bio, showcase your interests, or drop custom links.</p>
-        </section>
+    <hr>
 
-        <!-- Spotify Music Section -->
-        <section id="music">
-            <h2>My Spotify Profile</h2>
-            <div class="spotify-container">
-                <!-- Profile embed linked to user id 31mukm76ymettqxaris6z2jgosbu -->
-                <iframe style="border-radius:12px" 
-                    src="https://spotify.com" 
-                    width="100%" 
-                    height="352" 
-                    frameBorder="0" 
-                    allowfullscreen="" 
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                    loading="lazy">
-                </iframe>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Get In Touch</h2>
-            <form action="https://formspree.io" method="POST">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
+    <h2>music</h2>
+    <p>Current audio rotation from my Spotify profile:</p>
+    
+    <div class="spotify-wrapper">
+        <!-- Compact minimalist frame for your Spotify profile -->
+        <iframe style="border-radius:0px" 
+            src="https://spotify.com" 
+            width="100%" 
+            height="352" 
+            frameBorder="0" 
+            allowfullscreen="" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy">
+        </iframe>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 nongda. All Rights Reserved.</p>
-    </footer>
+    <hr>
+
+    <h2>contact</h2>
+    <p>Find me or reach out here:</p>
+    <p>
+        — <a href="mailto:your.email@example.com">email</a><br>
+        — <a href="https://spotify.com" target="_blank">spotify</a>
+    </p>
+
+    <div class="footer">
+        <p>n4ngda — 2026</p>
+    </div>
 
 </body>
 </html>
-
 

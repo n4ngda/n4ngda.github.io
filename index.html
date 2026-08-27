@@ -10,7 +10,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000 !important; /* Forces pure black background */
+    background-color: #000000 !important; 
     color: #ffffff;
 }
 
@@ -19,7 +19,7 @@ body {
     font-family: "Times New Roman", serif;
 }
 
-/* Minimal Screen Unlock Overlay */
+
 #gate {
     position: fixed;
     top: 0;
@@ -50,9 +50,9 @@ body {
     color: #ffffff;
 }
 
-/* Main content setup */
+
 #main {
-    display: none; /* Hidden until unlocked to satisfy browsers */
+    display: none; 
     min-height: 100vh;
     align-items: center;
     justify-content: center;
@@ -65,14 +65,14 @@ body {
     color: #888888;
 }
 
-/* Shrunk down and stylized profile frame */
+
 .profile-img {
-    width: 300px; /* Shrunk down and tidy */
+    width: 300px; 
     height: auto;
-    margin: 25px auto; /* Moves it cleanly under the clock sequence */
+    margin: 25px auto; 
     display: block;
-    border: 1px solid #333333; /* Micro minimalist frame overlay */
-}
+    border: 1px solid #333333; 
+
 
 a, .toggle-btn {
     color: #ffffff;
@@ -85,7 +85,7 @@ a:hover, .toggle-btn:hover {
     color: #000000;
 }
 
-/* Custom About Block */
+
 #about-section {
     display: none; 
     max-width: 450px;
@@ -97,7 +97,7 @@ a:hover, .toggle-btn:hover {
     text-align: center;
 }
 
-/* Jukebox Component Styling */
+
 .audio-container {
     margin-top: 25px;
     display: flex;
@@ -136,7 +136,7 @@ a:hover, .toggle-btn:hover {
 </style>
 
 <script>
-// ADD / MODIFY YOUR 10 MP3 FILES HERE
+
 const playlist = [
     { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
     { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" }, 
@@ -243,12 +243,12 @@ function toggleAbout() {
     }
 }
 
-// Custom handler that unlocks screen and bypasses audio blocks safely
+
 function unlockSite() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('main').style.display = 'flex';
     
-    // Instantly try to fire music node upon entry click
+
     audio.play().then(() => {
         playBtn.textContent = "[pause]";
     }).catch(err => {
@@ -272,7 +272,7 @@ window.onload = () => {
 
     loadTrack(currentIndex);
 
-    // Bind triggers to bypass media blocks safely
+   
     document.getElementById('enter-btn').addEventListener('click', unlockSite);
     document.addEventListener('keydown', unlockSite);
 };
@@ -282,7 +282,7 @@ window.onload = () => {
 
 <body>
 
-<!-- Clean Entrance Gate for secure background audio playback -->
+
 <div id="gate">
     <font size="6"><i><b>「N4NGDA」</b></i></font>
     <button id="enter-btn" class="gate-btn">[press any key to enter]</button>
@@ -303,7 +303,6 @@ window.onload = () => {
             </i>
         </span>
 
-        <!-- Links to your newly uploaded wallpaper image asset -->
         <img src="wallpaper.jpeg" class="profile-img" alt="n4ngda layout wallpaper">
 
         <span class="toggle-btn" onclick="toggleAbout()">about</span> //

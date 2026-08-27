@@ -10,7 +10,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000 !important; /* Forces pure black background */
+    background-color: #000000 !important; 
     color: #ffffff;
 }
 
@@ -19,7 +19,7 @@ body {
     font-family: "Times New Roman", serif;
 }
 
-/* Minimal Screen Unlock Overlay */
+
 #gate {
     position: fixed;
     top: 0;
@@ -50,9 +50,9 @@ body {
     color: #ffffff;
 }
 
-/* Main content setup */
+
 #main {
-    display: none; /* Hidden until unlocked to satisfy browsers */
+    display: none; 
     min-height: 100vh;
     align-items: center;
     justify-content: center;
@@ -65,13 +65,12 @@ body {
     color: #888888;
 }
 
-/* Centered high-resolution profile frame */
 .profile-img {
-    width: 300px; /* Kept tight and tidy */
+    width: 300px; 
     height: auto;
-    margin: 25px auto; /* Moves it cleanly under the clock sequence */
+    margin: 25px auto; 
     display: block;
-    border: 1px solid #333333; /* Micro minimalist frame overlay */
+    border: 1px solid #333333; 
 }
 
 a {
@@ -85,7 +84,7 @@ a:hover {
     color: #000000;
 }
 
-/* Jukebox Component Styling */
+
 .audio-container {
     margin-top: 25px;
     display: flex;
@@ -124,7 +123,7 @@ a:hover {
 </style>
 
 <script>
-// PLAYLIST ARRAY
+
 const playlist = [
     { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
     { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" }, 
@@ -222,12 +221,10 @@ function toggleShuffle() {
     }
 }
 
-// Custom handler that unlocks screen and bypasses audio blocks safely
 function unlockSite() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('main').style.display = 'flex';
-    
-    // Instantly try to fire music node upon entry click
+
     audio.play().then(() => {
         playBtn.textContent = "[pause]";
     }).catch(err => {
@@ -251,7 +248,6 @@ window.onload = () => {
 
     loadTrack(currentIndex);
 
-    // Bind triggers to bypass media blocks safely
     document.getElementById('enter-btn').addEventListener('click', unlockSite);
     document.addEventListener('keydown', unlockSite);
 };
@@ -261,10 +257,9 @@ window.onload = () => {
 
 <body>
 
-<!-- Entrance Gate -->
 <div id="gate">
     <font size="6"><i><b>「N4NGDA」</b></i></font>
-    <button id="enter-btn" class="gate-btn">[press any key to enter]</button>
+    <button id="enter-btn" class="gate-btn">[press any key to enter or click]</button>
 </div>
 
 <div id="main">
@@ -282,11 +277,10 @@ window.onload = () => {
             </i>
         </span>
 
-        <!-- Render only the high-res image.jpg cleanly in the middle -->
         <img src="image.jpg" class="profile-img" alt="n4ngda profile image">
 
-        <a href="https://instagram.com" target="_blank">instagram</a> //
-        <a href="https://spotify.com" target="_blank">spotify</a> //
+        <a href="https://instagram.com/n4ngda" target="_blank">instagram</a> //
+        <a href="https://open.spotify.com/user/31mukm76ymettqxaris6z2jgosbu" target="_blank">spotify</a> //
         <a href="https://strava.com" target="_blank">strava</a>
 
         <div class="audio-container">

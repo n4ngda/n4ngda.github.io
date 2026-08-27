@@ -102,6 +102,7 @@
             color: #000000;
         }
 
+        /* Sleek Audio Layout */
         .audio-container {
             margin-top: 10px;
             display: flex;
@@ -115,10 +116,25 @@
             margin-bottom: 8px;
         }
 
-        audio {
-            width: 100%;
-            max-width: 300px;
-            filter: invert(1) hue-rotate(180deg);
+        .audio-controls {
+            display: flex;
+            gap: 12px;
+            font-size: 0.85rem;
+        }
+
+        .audio-btn {
+            color: #888888;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .audio-btn:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        #shuffle-btn.active {
+            color: #ffffff;
         }
     </style>
 </head>
@@ -143,12 +159,35 @@
         </ul>
 
         <div class="audio-container">
-            <div class="audio-label">now playing: moon - prettifun</div>
-            <audio id="bg-audio" controls loop src="SpotiDownloader.com - Moon - prettifun.mp3"></audio> 
+            <audio id="bg-audio" src=""></audio> 
+            <div class="audio-label" id="track-title">now playing: loading...</div>
+            <div class="audio-controls">
+                <span class="audio-btn" onclick="prevTrack()">[prev]</span>
+                <span class="audio-btn" id="play-btn" onclick="togglePlay()">[pause]</span>
+                <span class="audio-btn" onclick="nextTrack()">[next]</span>
+                <span class="audio-btn" id="shuffle-btn" onclick="toggleShuffle()">[shuffle: off]</span>
+            </div>
         </div>
     </div>
 
     <script>
+        // 1. ADD NEW MP3 FILES HERE
+        // Put the files in your repo folder. Change track names and file names below.
+        const playlist = [
+            { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
+            { title: "track two - artist name", src: "music/track2.mp3" },
+            { title: "track three - artist name", src: "music/track3.mp3" }
+        ];
+
+        let currentIndex = 0;
+        let isShuffle = false;
+        let trackHistory = [];
+
+        const audio = document.getElementById('bg-audio');
+        const trackTitle = document.getElementById('track-title');
+        const playBtn = document.getElementById('play-btn');
+        const shuffleBtn = document.getElementById('shuffle-btn');
+
         function updateClock() {
             const options = {
                 timeZone: 'Asia/Kolkata',
@@ -163,27 +202,94 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Core unlock action function
+        // Load targeted track metadata
+        function loadTrack(index) {
+            currentIndex = index;
+            audio.src = playlist[currentIndex].src;
+            trackTitle.textContent = `now playing: ${playlist[currentIndex].title}`;
+        }
+
+        // Toggle native play / pause engine state
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(err => console.log(err));
+                playBtn.textContent = "[pause]";
+            } else {
+                audio.pause();
+                playBtn.textContent = "[play]";
+            }
+        }
+
+        // Advance to next audio node
+        function nextTrack() {
+            trackHistory.push(currentIndex);
+            if (isShuffle) {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * playlist.length);
+                } while (randomIndex === currentIndex && playlist.length > 1);
+                currentIndex = randomIndex;
+            } else {
+                currentIndex = (currentIndex + 1) % playlist.length;
+            }
+            loadTrack(currentIndex);
+            audio.play().catch(err => console.log(err));
+            playBtn.textContent = "[pause]";
+        }
+
+        // Revert to historical or previous audio node
+        function prevTrack() {
+            if (trackHistory.length > 0) {
+                currentIndex = trackHistory.pop();
+            } else {
+                currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            }
+            loadTrack(currentIndex);
+            audio.play().catch(err => console.log(err));
+            playBtn.textContent = "[pause]";
+        }
+
+        // Toggle random playlist playback logic
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            if (isShuffle) {
+                shuffleBtn.textContent = "[shuffle: on]";
+                shuffleBtn.classList.add('active');
+            } else {
+                shuffleBtn.textContent = "[shuffle: off]";
+                shuffleBtn.classList.remove('active');
+                trackHistory = [];
+            }
+        }
+
+        // Trigger next track immediately when song finishes looping
+        audio.addEventListener('ended', nextTrack);
+
+        // Core unlock page action function
         function unlockSite() {
             document.getElementById('gate').style.display = 'none';
             document.getElementById('main-content').style.display = 'flex';
             
-            const audio = document.getElementById('bg-audio');
-            audio.play().catch(err => console.log("Audio play blocked:", err));
+            // Fire current loaded audio tracks right away
+            audio.play().catch(err => {
+                console.log("Audio play blocked:", err);
+                playBtn.textContent = "[play]";
+            });
 
-            // Clean up event listeners so they don't fire again
             document.removeEventListener('keydown', unlockSite);
         }
 
-        // Trigger unlock via manual button click (for mobile/touch screens)
-        document.getElementById('enter-btn').addEventListener('click', unlockSite);
+        // Seed initialization tracks
+        loadTrack(currentIndex);
 
-        // Trigger unlock when any keyboard key is pressed (for desktop browsers)
+        // Entry point bindings
+        document.getElementById('enter-btn').addEventListener('click', unlockSite);
         document.addEventListener('keydown', unlockSite);
     </script>
 
 </body>
 </html>
+
 
 
 

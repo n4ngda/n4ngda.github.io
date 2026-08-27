@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8">
+<!-- Fixed browser tab title -->
 <title>n4ngda</title>
 <meta name="author" content="n4ngda">
-
 
 <style>
 html,
@@ -12,7 +12,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000 !important; 
+    background-color: #000000 !important; /* Forces pure black background */
     color: #ffffff;
 }
 
@@ -21,7 +21,7 @@ body {
     font-family: "Times New Roman", serif;
 }
 
-
+/* Minimal Screen Unlock Overlay */
 #gate {
     position: fixed;
     top: 0;
@@ -52,9 +52,9 @@ body {
     color: #ffffff;
 }
 
-
+/* Main content setup */
 #main {
-    display: none; 
+    display: none; /* Hidden until unlocked to satisfy browsers */
     min-height: 100vh;
     align-items: center;
     justify-content: center;
@@ -67,12 +67,13 @@ body {
     color: #888888;
 }
 
+/* Centered high-resolution profile frame */
 .profile-img {
-    width: 300px; 
+    width: 300px; /* Kept tight and tidy */
     height: auto;
-    margin: 25px auto; 
+    margin: 25px auto; /* Moves it cleanly under the clock sequence */
     display: block;
-    border: 1px solid #333333; 
+    border: 1px solid #333333; /* Micro minimalist frame overlay */
 }
 
 a {
@@ -86,7 +87,7 @@ a:hover {
     color: #000000;
 }
 
-
+/* Jukebox Component Styling */
 .audio-container {
     margin-top: 25px;
     display: flex;
@@ -122,10 +123,38 @@ a:hover {
 #shuffle-btn.active {
     color: #ffffff;
 }
+
+/* Sleek Minimalist Log Styling */
+.log-container {
+    margin-top: 40px;
+    max-width: 340px;
+    text-align: left;
+    font-family: monospace;
+    font-size: 13px;
+    color: #888888;
+    line-height: 1.6;
+}
+
+.log-title {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #333333;
+    padding-bottom: 4px;
+    text-align: center;
+}
+
+.log-entry {
+    margin-bottom: 6px;
+}
+
+.log-date {
+    color: #ffffff;
+}
 </style>
 
 <script>
-
+// PLAYLIST ARRAY
 const playlist = [
     { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
     { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" }, 
@@ -223,10 +252,12 @@ function toggleShuffle() {
     }
 }
 
+// Custom handler that unlocks screen and bypasses audio blocks safely
 function unlockSite() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('main').style.display = 'flex';
-
+    
+    // Instantly try to fire music node upon entry click
     audio.play().then(() => {
         playBtn.textContent = "[pause]";
     }).catch(err => {
@@ -250,6 +281,7 @@ window.onload = () => {
 
     loadTrack(currentIndex);
 
+    // Bind triggers to bypass media blocks safely
     document.getElementById('enter-btn').addEventListener('click', unlockSite);
     document.addEventListener('keydown', unlockSite);
 };
@@ -259,9 +291,10 @@ window.onload = () => {
 
 <body>
 
+<!-- Entrance Gate -->
 <div id="gate">
     <font size="6"><i><b>「N4NGDA」</b></i></font>
-    <button id="enter-btn" class="gate-btn">[press any key to enter or click]</button>
+    <button id="enter-btn" class="gate-btn">[press any key to enter]</button>
 </div>
 
 <div id="main">
@@ -279,12 +312,14 @@ window.onload = () => {
             </i>
         </span>
 
+        <!-- Render only the high-res image.jpg cleanly in the middle -->
         <img src="image.jpg" class="profile-img" alt="n4ngda profile image">
 
-        <a href="https://instagram.com/n4ngda" target="_blank">instagram</a> //
-        <a href="https://open.spotify.com/user/31mukm76ymettqxaris6z2jgosbu" target="_blank">spotify</a> //
-        <a href="https://www.strava.com/athletes/179097665" target="_blank">strava</a>
+        <a href="https://instagram.com" target="_blank">instagram</a> //
+        <a href="https://spotify.com" target="_blank">spotify</a> //
+        <a href="https://strava.com" target="_blank">strava</a>
 
+        <!-- Jukebox Component -->
         <div class="audio-container">
             <audio id="bg-audio" src=""></audio> 
             <div class="audio-label" id="track-title">now playing: loading...</div>
@@ -296,8 +331,20 @@ window.onload = () => {
             </div>
         </div>
 
+        <!-- NEW SMALL LOG SECTION -->
+        <!-- You can easily add more lines inside this div to document your log updates! -->
+        <div class="log-container">
+            <div class="log-title">~/updates</div>
+            <div class="log-entry"><span class="log-date">{27-8-26}</span> refreshed layout / launched custom jukebox</div>
+            <div class="log-entry"><span class="log-date">{26-8-26}</span> updated high-res imagery frame asset</div>
+        </div>
+
     </div>
 </div>
+
+</body>
+</html>
+
 
 </body>
 </html>

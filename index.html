@@ -19,13 +19,45 @@ body {
     font-family: "Times New Roman", serif;
 }
 
-#main {
-    min-height: 100vh;
+/* Minimal Screen Unlock Overlay */
+#gate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+}
+
+.gate-btn {
+    color: #888888;
+    background: none;
+    border: none;
+    font-family: monospace;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.gate-btn:hover {
+    color: #ffffff;
+}
+
+/* Main content setup */
+#main {
+    display: none; /* Hidden until unlocked to satisfy browsers */
+    min-height: 100vh;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #000000 !important; /* Extra backup layer for mobile browsers */
+    background-color: #000000 !important; 
 }
 
 #timezone {
@@ -33,14 +65,36 @@ body {
     color: #888888;
 }
 
-a {
-    color: #ffffff;
-    text-decoration: none;
+/* Shrunk down and stylized profile frame */
+.profile-img {
+    width: 300px; /* Shrunk down and tidy */
+    height: auto;
+    margin: 25px auto; /* Moves it cleanly under the clock sequence */
+    display: block;
+    border: 1px solid #333333; /* Micro minimalist frame overlay */
 }
 
-a:hover {
+a, .toggle-btn {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover, .toggle-btn:hover {
     background-color: #ffffff;
     color: #000000;
+}
+
+/* Custom About Block */
+#about-section {
+    display: none; 
+    max-width: 450px;
+    margin: 20px auto 0 auto;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #cccccc;
+    font-style: italic;
+    text-align: center;
 }
 
 /* Jukebox Component Styling */
@@ -82,7 +136,7 @@ a:hover {
 </style>
 
 <script>
-// 1. ADD / MODIFY YOUR 10 MP3 FILES HERE
+// ADD / MODIFY YOUR 10 MP3 FILES HERE
 const playlist = [
     { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
     { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" }, 
@@ -126,7 +180,9 @@ function updateTime() {
 function loadTrack(index) {
     currentIndex = index;
     audio.src = playlist[currentIndex].src;
-    trackTitle.textContent = `now playing: ${playlist[currentIndex].title}`;
+    if(trackTitle) {
+        trackTitle.textContent = `now playing: ${playlist[currentIndex].title}`;
+    }
 }
 
 function togglePlay() {
@@ -145,7 +201,7 @@ function nextTrack() {
         let randomIndex;
         do {
             randomIndex = Math.floor(Math.random() * playlist.length);
-                } while (randomIndex === currentIndex && playlist.length > 1);
+        } while (randomIndex === currentIndex && playlist.length > 1);
         currentIndex = randomIndex;
     } else {
         currentIndex = (currentIndex + 1) % playlist.length;
@@ -178,12 +234,35 @@ function toggleShuffle() {
     }
 }
 
+function toggleAbout() {
+    const aboutSection = document.getElementById("about-section");
+    if (aboutSection.style.display === "block") {
+        aboutSection.style.display = "none";
+    } else {
+        aboutSection.style.display = "block";
+    }
+}
+
+// Custom handler that unlocks screen and bypasses audio blocks safely
+function unlockSite() {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'flex';
+    
+    // Instantly try to fire music node upon entry click
+    audio.play().then(() => {
+        playBtn.textContent = "[pause]";
+    }).catch(err => {
+        console.log("Audio play blocked:", err);
+        playBtn.textContent = "[play]";
+    });
+
+    document.removeEventListener('keydown', unlockSite);
+}
+
 window.onload = () => {
-    // Setup clock updates
     updateTime();
     setInterval(updateTime, 1000);
 
-    // Setup audio handles
     audio = document.getElementById('bg-audio');
     trackTitle = document.getElementById('track-title');
     playBtn = document.getElementById('play-btn');
@@ -191,8 +270,11 @@ window.onload = () => {
 
     audio.addEventListener('ended', nextTrack);
 
-    // Initialize first music track
     loadTrack(currentIndex);
+
+    // Bind triggers to bypass media blocks safely
+    document.getElementById('enter-btn').addEventListener('click', unlockSite);
+    document.addEventListener('keydown', unlockSite);
 };
 </script>
 
@@ -200,15 +282,16 @@ window.onload = () => {
 
 <body>
 
+<!-- Clean Entrance Gate for secure background audio playback -->
+<div id="gate">
+    <font size="6"><i><b>「N4NGDA」</b></i></font>
+    <button id="enter-btn" class="gate-btn">[press any key to enter]</button>
+</div>
+
 <div id="main">
     <div>
 
         <font size="12"><i><b>「N4NGDA」</b></i></font>
-
-        <br><br>
-
-        <!-- Your avatar image from your repository -->
-        <img src="n4ngda.jpg" style="width:560px;" alt="n4ngda image">
 
         <br><br>
 
@@ -220,13 +303,18 @@ window.onload = () => {
             </i>
         </span>
 
-        <br><br>
+        <!-- Links to your newly uploaded wallpaper image asset -->
+        <img src="wallpaper.jpeg" class="profile-img" alt="n4ngda layout wallpaper">
 
+        <span class="toggle-btn" onclick="toggleAbout()">about</span> //
         <a href="https://instagram.com" target="_blank">instagram</a> //
         <a href="https://spotify.com" target="_blank">spotify</a> //
         <a href="https://strava.com" target="_blank">strava</a>
 
-        <!-- Custom Jukebox inside James Scholz architecture -->
+        <div id="about-section">
+            hey, i'm nongda. welcome to my website. exploring music, code, and trying to cycle everyday in imphal. i also like distorted music for some reason like matt proxy, edward skeletrix etc.
+        </div>
+
         <div class="audio-container">
             <audio id="bg-audio" src=""></audio> 
             <div class="audio-label" id="track-title">now playing: loading...</div>
@@ -243,6 +331,7 @@ window.onload = () => {
 
 </body>
 </html>
+
 
 
 

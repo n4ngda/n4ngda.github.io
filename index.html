@@ -2,10 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>JAMES SCHOLZ</title>
-
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<title>n4ngda</title>
 
 <style>
 html,
@@ -13,6 +10,8 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
+    background-color: #000000 !important; /* Forces pure black background */
+    color: #ffffff;
 }
 
 body {
@@ -26,30 +25,85 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: #000000 !important; /* Extra backup layer for mobile browsers */
 }
 
 #timezone {
     font-size: 18px;
+    color: #888888;
 }
 
-#contact {
-    position: fixed;
-    right: 16px;
-    bottom: 12px;
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Jukebox Component Styling */
+.audio-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.audio-label {
+    font-size: 15px;
+    font-style: italic;
+    color: #888888;
+    margin-bottom: 8px;
+}
+
+.audio-controls {
+    display: flex;
+    gap: 12px;
     font-size: 14px;
-    color: #666;
-    text-align: right;
-    line-height: 1.35;
+    font-family: monospace;
 }
 
-#contact .address {
-    margin-top: 8px;
+.audio-btn {
+    color: #666666;
+    cursor: pointer;
+    user-select: none;
+}
+
+.audio-btn:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+#shuffle-btn.active {
+    color: #ffffff;
 }
 </style>
 
 <script>
+// 1. ADD / MODIFY YOUR 10 MP3 FILES HERE
+const playlist = [
+    { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
+    { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" }, 
+    { title: "song 3 title", src: "music/song3.mp3" },
+    { title: "song 4 title", src: "music/song4.mp3" },
+    { title: "song 5 title", src: "music/song5.mp3" },
+    { title: "song 6 title", src: "music/song6.mp3" },
+    { title: "song 7 title", src: "music/song7.mp3" },
+    { title: "song 8 title", src: "music/song8.mp3" },
+    { title: "song 9 title", src: "music/song9.mp3" },
+    { title: "song 10 title", src: "music/song10.mp3" }
+];
+
+let currentIndex = 0;
+let isShuffle = false;
+let trackHistory = [];
+
+let audio, trackTitle, playBtn, shuffleBtn;
+
 const formatter = new Intl.DateTimeFormat([], {
-    timeZone: "US/Mountain",
+    timeZone: "Asia/Kolkata",
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
@@ -63,15 +117,82 @@ function updateTime() {
         parts
             .filter(part => part.type !== "timeZoneName")
             .map(part => part.value)
-            .join("");
+            .join("").toLowerCase();
 
     document.getElementById("tz").textContent =
         parts.find(part => part.type === "timeZoneName").value;
 }
 
+function loadTrack(index) {
+    currentIndex = index;
+    audio.src = playlist[currentIndex].src;
+    trackTitle.textContent = `now playing: ${playlist[currentIndex].title}`;
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play().catch(err => console.log(err));
+        playBtn.textContent = "[pause]";
+    } else {
+        audio.pause();
+        playBtn.textContent = "[play]";
+    }
+}
+
+function nextTrack() {
+    trackHistory.push(currentIndex);
+    if (isShuffle) {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * playlist.length);
+                } while (randomIndex === currentIndex && playlist.length > 1);
+        currentIndex = randomIndex;
+    } else {
+        currentIndex = (currentIndex + 1) % playlist.length;
+    }
+    loadTrack(currentIndex);
+    audio.play().catch(err => console.log(err));
+    playBtn.textContent = "[pause]";
+}
+
+function prevTrack() {
+    if (trackHistory.length > 0) {
+        currentIndex = trackHistory.pop();
+    } else {
+        currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+    }
+    loadTrack(currentIndex);
+    audio.play().catch(err => console.log(err));
+    playBtn.textContent = "[pause]";
+}
+
+function toggleShuffle() {
+    isShuffle = !isShuffle;
+    if (isShuffle) {
+        shuffleBtn.textContent = "[shuffle: on]";
+        shuffleBtn.classList.add('active');
+    } else {
+        shuffleBtn.textContent = "[shuffle: off]";
+        shuffleBtn.classList.remove('active');
+        trackHistory = [];
+    }
+}
+
 window.onload = () => {
+    // Setup clock updates
     updateTime();
     setInterval(updateTime, 1000);
+
+    // Setup audio handles
+    audio = document.getElementById('bg-audio');
+    trackTitle = document.getElementById('track-title');
+    playBtn = document.getElementById('play-btn');
+    shuffleBtn = document.getElementById('shuffle-btn');
+
+    audio.addEventListener('ended', nextTrack);
+
+    // Initialize first music track
+    loadTrack(currentIndex);
 };
 </script>
 
@@ -82,29 +203,40 @@ window.onload = () => {
 <div id="main">
     <div>
 
-        <font size="12"><i><b>「NONGDA MAIBAM」</b></i></font>
+        <font size="12"><i><b>「N4NGDA」</b></i></font>
 
         <br><br>
 
-        <img src="assets/banner.png" style="width:560px;" alt="u of u">
+        <!-- Your avatar image from your repository -->
+        <img src="n4ngda.jpg" style="width:560px;" alt="n4ngda image">
 
         <br><br>
 
         <span id="timezone">
             <i>
-                TIME IN IMPHA; -
-                <span id="time">0:00 PM</span>
-                <span id="tz">MST</span>
+                TIME IN IMPHAL -
+                <span id="time">0:00 pm</span>
+                <span id="tz">IST</span>
             </i>
         </span>
 
         <br><br>
 
-        <a href="http://jvscholz.com/about.html">about</a> //
-        <a href="https://bloggyddoggy.com">blog</a> //
-        <a href="https://www.youtube.com/@jamesscholz">youtube</a> //
-        <a href="https://github.com/jvscholz">github</a> //
-        <a href="https://www.imdb.com/name/nm16046186/">imdb</a>
+        <a href="https://instagram.com" target="_blank">instagram</a> //
+        <a href="https://spotify.com" target="_blank">spotify</a> //
+        <a href="https://strava.com" target="_blank">strava</a>
+
+        <!-- Custom Jukebox inside James Scholz architecture -->
+        <div class="audio-container">
+            <audio id="bg-audio" src=""></audio> 
+            <div class="audio-label" id="track-title">now playing: loading...</div>
+            <div class="audio-controls">
+                <span class="audio-btn" onclick="prevTrack()">[prev]</span>
+                <span class="audio-btn" id="play-btn" onclick="togglePlay()">[play]</span>
+                <span class="audio-btn" onclick="nextTrack()">[next]</span>
+                <span class="audio-btn" id="shuffle-btn" onclick="toggleShuffle()">[shuffle: off]</span>
+            </div>
+        </div>
 
     </div>
 </div>

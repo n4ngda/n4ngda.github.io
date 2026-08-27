@@ -10,7 +10,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000 !important; 
+    background-color: #000000 !important; /* Forces pure black background */
     color: #ffffff;
 }
 
@@ -19,7 +19,7 @@ body {
     font-family: "Times New Roman", serif;
 }
 
-
+/* Minimal Screen Unlock Overlay */
 #gate {
     position: fixed;
     top: 0;
@@ -50,9 +50,9 @@ body {
     color: #ffffff;
 }
 
-
+/* Main content setup */
 #main {
-    display: none; 
+    display: none; /* Hidden until unlocked to satisfy browsers */
     min-height: 100vh;
     align-items: center;
     justify-content: center;
@@ -65,39 +65,27 @@ body {
     color: #888888;
 }
 
-
+/* Centered high-resolution profile frame */
 .profile-img {
-    width: 300px; 
+    width: 300px; /* Kept tight and tidy */
     height: auto;
-    margin: 25px auto; 
+    margin: 25px auto; /* Moves it cleanly under the clock sequence */
     display: block;
-    border: 1px solid #333333; 
+    border: 1px solid #333333; /* Micro minimalist frame overlay */
+}
 
-
-a, .toggle-btn {
+a {
     color: #ffffff;
     text-decoration: none;
     cursor: pointer;
 }
 
-a:hover, .toggle-btn:hover {
+a:hover {
     background-color: #ffffff;
     color: #000000;
 }
 
-
-#about-section {
-    display: none; 
-    max-width: 450px;
-    margin: 20px auto 0 auto;
-    font-size: 15px;
-    line-height: 1.5;
-    color: #cccccc;
-    font-style: italic;
-    text-align: center;
-}
-
-
+/* Jukebox Component Styling */
 .audio-container {
     margin-top: 25px;
     display: flex;
@@ -136,7 +124,7 @@ a:hover, .toggle-btn:hover {
 </style>
 
 <script>
-
+// PLAYLIST ARRAY
 const playlist = [
     { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
     { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" }, 
@@ -234,21 +222,12 @@ function toggleShuffle() {
     }
 }
 
-function toggleAbout() {
-    const aboutSection = document.getElementById("about-section");
-    if (aboutSection.style.display === "block") {
-        aboutSection.style.display = "none";
-    } else {
-        aboutSection.style.display = "block";
-    }
-}
-
-
+// Custom handler that unlocks screen and bypasses audio blocks safely
 function unlockSite() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('main').style.display = 'flex';
     
-
+    // Instantly try to fire music node upon entry click
     audio.play().then(() => {
         playBtn.textContent = "[pause]";
     }).catch(err => {
@@ -272,7 +251,7 @@ window.onload = () => {
 
     loadTrack(currentIndex);
 
-   
+    // Bind triggers to bypass media blocks safely
     document.getElementById('enter-btn').addEventListener('click', unlockSite);
     document.addEventListener('keydown', unlockSite);
 };
@@ -282,7 +261,7 @@ window.onload = () => {
 
 <body>
 
-
+<!-- Entrance Gate -->
 <div id="gate">
     <font size="6"><i><b>「N4NGDA」</b></i></font>
     <button id="enter-btn" class="gate-btn">[press any key to enter]</button>
@@ -303,16 +282,12 @@ window.onload = () => {
             </i>
         </span>
 
-        <img src="n4ngda.jpg" class="profile-img" alt="n4ngda layout wallpaper">
+        <!-- Render only the high-res image.jpg cleanly in the middle -->
+        <img src="image.jpg" class="profile-img" alt="n4ngda profile image">
 
-        <span class="toggle-btn" onclick="toggleAbout()">about</span> //
         <a href="https://instagram.com" target="_blank">instagram</a> //
         <a href="https://spotify.com" target="_blank">spotify</a> //
         <a href="https://strava.com" target="_blank">strava</a>
-
-        <div id="about-section">
-          
-        </div>
 
         <div class="audio-container">
             <audio id="bg-audio" src=""></audio> 
@@ -330,8 +305,3 @@ window.onload = () => {
 
 </body>
 </html>
-
-
-
-
-

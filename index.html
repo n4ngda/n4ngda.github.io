@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset = "utf-8">
+<meta charset="utf-8">
 
 <title>n4ngda</title>
-<meta name = "author" content = "n4ngda">
+<meta name="author" content="n4ngda">
 
 <style>
 html,
@@ -12,8 +12,8 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color:
-    color:
+    background-color: #000000 !important; 
+    color: #ffffff;
 }
 
 body {
@@ -21,12 +21,14 @@ body {
     font-family: "Times New Roman", serif;
 }
 
+
+#gate {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background:
+    background: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +38,7 @@ body {
 }
 
 .gate-btn {
-    color:
+    color: #888888;
     background: none;
     border: none;
     font-family: monospace;
@@ -47,39 +49,44 @@ body {
 }
 
 .gate-btn:hover {
-    color:
+    color: #ffffff;
 }
 
+
+#main {
     display: none;
     min-height: 100vh;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color:
+    background-color: #000000 !important; 
 }
 
+#timezone {
     font-size: 18px;
-    color:
+    color: #888888;
 }
+
 
 .profile-img {
-    width: 300px;
+    width: 300px; 
     height: auto;
-    margin: 25px auto;
+    margin: 25px auto; 
     display: block;
-    border: 1px solid
+    border: 1px solid #333333; 
 }
 
 a {
-    color:
+    color: #ffffff;
     text-decoration: none;
     cursor: pointer;
 }
 
 a:hover {
-    background-color:
-    color:
+    background-color: #ffffff;
+    color: #000000;
 }
+
 
 .audio-container {
     margin-top: 25px;
@@ -91,7 +98,7 @@ a:hover {
 .audio-label {
     font-size: 15px;
     font-style: italic;
-    color:
+    color: #888888;
     margin-bottom: 8px;
 }
 
@@ -103,18 +110,20 @@ a:hover {
 }
 
 .audio-btn {
-    color:
+    color: #666666;
     cursor: pointer;
     user-select: none;
 }
 
 .audio-btn:hover {
-    color:
+    color: #ffffff;
     text-decoration: underline;
 }
 
-    color:
+#shuffle-btn.active {
+    color: #ffffff;
 }
+
 
 .log-container {
     margin-top: 40px;
@@ -122,15 +131,15 @@ a:hover {
     text-align: left;
     font-family: monospace;
     font-size: 13px;
-    color:
+    color: #888888;
     line-height: 1.6;
 }
 
 .log-title {
-    color:
+    color: #ffffff;
     font-size: 14px;
     margin-bottom: 10px;
-    border-bottom: 1px dashed
+    border-bottom: 1px dashed #333333;
     padding-bottom: 4px;
     text-align: center;
 }
@@ -140,7 +149,7 @@ a:hover {
 }
 
 .log-date {
-    color:
+    color: #ffffff;
 }
 </style>
 
@@ -148,7 +157,7 @@ a:hover {
 
 const playlist = [
     { title: "catfish - matt proxy", src: "catfish - matt proxy.mp3" },
-    { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" },
+    { title: "moon - prettifun", src: "SpotiDownloader.com - Moon - prettifun.mp3" }, 
     { title: "like what ? - lil shine", src: "like what - lil shine.mp3" },
     { title: "misery - matt proxy", src: "MISERY - matt proxy.mp3" },
     { title: "song 5 title", src: "music/song5.mp3" },
@@ -243,9 +252,11 @@ function toggleShuffle() {
     }
 }
 
+
 function unlockSite() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('main').style.display = 'flex';
+    
 
     audio.play().then(() => {
         playBtn.textContent = "[pause]";
@@ -270,6 +281,7 @@ window.onload = () => {
 
     loadTrack(currentIndex);
 
+
     document.getElementById('enter-btn').addEventListener('click', unlockSite);
     document.addEventListener('keydown', unlockSite);
 };
@@ -279,49 +291,53 @@ window.onload = () => {
 
 <body>
 
-<div id = "gate">
-    <font size = "6"><i><b>「N4NGDA」</b></i></font>
-    <button id = "enter-btn" class = "gate-btn">[press any key to enter or click]</button>
+
+<div id="gate">
+    <font size="6"><i><b>「N4NGDA」</b></i></font>
+    <button id="enter-btn" class="gate-btn">[press any key to enter or click]</button>
 </div>
 
-<div id = "main">
+<div id="main">
     <div>
 
-        <font size = "12"><i><b>「N4NGDA」</b></i></font>
+        <font size="12"><i><b>「N4NGDA」</b></i></font>
 
         <br><br>
 
-        <span id = "timezone">
+        <span id="timezone">
             <i>
                 TIME IN IMPHAL -
-                <span id = "time">0:00 pm</span>
-                <span id = "tz">IST</span>
+                <span id="time">0:00 pm</span>
+                <span id="tz">IST</span>
             </i>
         </span>
 
-        <img src = "image.jpg" class = "profile-img" alt = "n4ngda profile image">
+  
+        <img src="image.jpg" class="profile-img" alt="n4ngda profile image">
 
-        <a href = "https://instagram.com/n4ngda" target = "_blank">instagram</a>
-        <a href = "https://open.spotify.com/user/31mukm76ymettqxaris6z2jgosbu" target = "_blank">spotify</a>
-        <a href = "https://www.strava.com/athletes/179097665" target = "_blank">strava</a>
+        <a href="https://instagram.com/n4ngda" target="_blank">instagram</a> //
+        <a href="https://open.spotify.com/user/31mukm76ymettqxaris6z2jgosbu" target="_blank">spotify</a> //
+        <a href="https://www.strava.com/athletes/179097665" target="_blank">strava</a>
 
-        <div class = "audio-container">
-            <audio id = "bg-audio" src = ""></audio>
-            <div class = "audio-label" id = "track-title">now playing: loading...</div>
-            <div class = "audio-controls">
-                <span class = "audio-btn" onclick = "prevTrack()">[prev]</span>
-                <span class = "audio-btn" id = "play-btn" onclick = "togglePlay()">[play]</span>
-                <span class = "audio-btn" onclick = "nextTrack()">[next]</span>
-                <span class = "audio-btn" id = "shuffle-btn" onclick = "toggleShuffle()">[shuffle: off]</span>
+  
+        <div class="audio-container">
+            <audio id="bg-audio" src=""></audio> 
+            <div class="audio-label" id="track-title">now playing: loading...</div>
+            <div class="audio-controls">
+                <span class="audio-btn" onclick="prevTrack()">[prev]</span>
+                <span class="audio-btn" id="play-btn" onclick="togglePlay()">[play]</span>
+                <span class="audio-btn" onclick="nextTrack()">[next]</span>
+                <span class="audio-btn" id="shuffle-btn" onclick="toggleShuffle()">[shuffle: off]</span>
             </div>
         </div>
 
-        <div class = "log-container">
-            <div class = "log-title"> updates</div>
-            <div class = "log-entry"><span class = "log-date">{29-8-26}</span> well, cycled 9.6kms until my chain broke... atleast we got a workout done and took photo with traditional for school, kinda mid lowkey </div>
-             <div class = "log-entry"><span class = "log-date">{28-8-26}</span> i sat alone today, i dont know why but it felt calm, and i woke up at 4am and slept cause it was too cold, maybe ill go cycle tommorow</div>
-            <div class = "log-entry"><span class = "log-date">{27-8-26}</span> been struggling with waking up tbh & imphal doesnt have good places </div>
-            <div class = "log-entry"><span class = "log-date">{26-8-26}</span> made my first website c: </div>
+      
+        <div class="log-container">
+            <div class="log-title"> updates</div>
+            <div class="log-entry"><span class="log-date">{29-8-26}</span> well, cycled 9.6kms until my chain broke... atleast we got a workout done and took photo with traditional for school, kinda mid lowkey </div>
+             <div class="log-entry"><span class="log-date">{28-8-26}</span> i sat alone today, i dont know why but it felt calm, and i woke up at 4am and slept cause it was too cold, maybe ill go cycle tommorow</div>
+            <div class="log-entry"><span class="log-date">{27-8-26}</span> been struggling with waking up tbh & imphal doesnt have good places </div>
+            <div class="log-entry"><span class="log-date">{26-8-26}</span> made my first website c: </div>
         </div>
 
     </div>
@@ -329,6 +345,7 @@ window.onload = () => {
 
 </body>
 </html>
+
 
 </body>
 </html>

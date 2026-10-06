@@ -12,13 +12,28 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000 !important; 
     color: #ffffff;
+}
+
+html {
+    background-color: #000000;
 }
 
 body {
     min-height: 100vh;
     font-family: "Times New Roman", serif;
+    background-color: transparent;
+}
+
+/* --- Looping video background --- */
+#bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.4;
 }
 
 /* --- Custom Minimalist Scrollbar --- */
@@ -85,7 +100,6 @@ html {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #000000 !important; 
 }
 
 #timezone {
@@ -147,50 +161,6 @@ a:hover {
 }
 
 #shuffle-btn.active {
-    color: #ffffff;
-}
-
-
-.log-container {
-    margin-top: 40px;
-    max-width: 340px;
-    text-align: left;
-    font-family: monospace;
-    font-size: 13px;
-    color: #888888;
-    line-height: 1.6;
-
-    /* scrollable update panel */
-    max-height: 220px;
-    overflow-y: scroll;
-    padding-right: 10px;
-}
-
-.log-title {
-    color: #ffffff;
-    font-size: 14px;
-    margin-bottom: 10px;
-    border-bottom: 1px dashed #333333;
-    padding-bottom: 4px;
-    text-align: center;
-
-    /* keep the title pinned while entries scroll underneath */
-    position: sticky;
-    top: 0;
-    background-color: #000000;
-}
-
-.log-entry {
-    margin-bottom: 6px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed #1a1a1a;
-}
-
-.log-entry:last-child {
-    border-bottom: none;
-}
-
-.log-date {
     color: #ffffff;
 }
 </style>
@@ -327,6 +297,9 @@ window.onload = () => {
 
 <body>
 
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="bg.mp4" type="video/mp4">
+</video>
 
 <div id="gate">
     <font size="6"><i><b>「N4NGDA」</b></i></font>
@@ -365,19 +338,6 @@ window.onload = () => {
                 <span class="audio-btn" onclick="nextTrack()">[next]</span>
                 <span class="audio-btn" id="shuffle-btn" onclick="toggleShuffle()">[shuffle: off]</span>
             </div>
-        </div>
-
-      
-        <div class="log-container">
-            <div class="log-title"> updates</div>
-           <div class="log-entry"><span class="log-date">{24-9-26}</span> i am a person thats willing to do anything to pursue something meaningful in my life, i try to stay out of my ego and try to have peace in my life. peace and genuine kindness is all i need in my life and being comfortable and doing work that makes me or fullfills a good life for me  </div>
-            <div class="log-entry"><span class="log-date">{19-9-26}</span> lifes good, i have a purpose now </div>
-             <div class="log-entry"><span class="log-date">{16-9-26}</span> since last month i was heavily struggling with lust, i feel like it affected my life and hobbies so much that i couldnt focus, started preparing for exams i.e on date 22, i wish the best for myself and for a strong mind thats capable of handling it </div>
-            <div class="log-entry"><span class="log-date">{12-9-26}</span> i feel like having peace in my life is very important, why do i care so much about something when it only causes me suffering? i dont wanna have a huge ego or be driven by anger. if i ever become someone like that was my entire life wrong and was i the person who i hated the most? i feel like insecurities have gotten the best out of me, cant even step out of the house cause of it nowadays </div>
-            <div class="log-entry"><span class="log-date">{6-9-26}</span> did some work today, cleaned my room, organized my desk, did physics and listening to matt proxy. i feel like trojan horse by matt proxy resembles who i am on the internet. i am someone who you wouldnt know anything about my life from social media. i value love, peace, sincerity so much. and to those who im close and friends with. thank you melson,henba,chingsang for making my august and september alot better. if you see this thank you </div>
-              <div class="log-entry"><span class="log-date">{1-9-26}</span> its september now, life going wayy too fast this year, lowkey grateful for zero cal sodas, especially coke. u da goat </div>
-            <div class="log-entry"><span class="log-date">{30-8-26}</span> well its 9:58 am rn, gonna go clean my room, eat good food, finish some work for maths and english maybe even home science and go to my friends place to install linux mint and also didnt went cycling today. body was a bit tired so skipped it </div>
-            <div class="log-entry"><span class="log-date">{29-8-26}</span> well, cycled 9.6kms until my chain broke... atleast we got a workout done and took photo with traditional for school, kinda mid lowkey </div>
         </div>
 
     </div>
